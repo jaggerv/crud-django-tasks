@@ -2,3 +2,15 @@ body {
     background: #073b4c;
     color: #ffd166;
 }
+
+label{
+    color: black;
+}
+
+div.card.card-body{
+    background-color: #118AB2;
+}
+
+h4, p{
+    color: white; 
+}

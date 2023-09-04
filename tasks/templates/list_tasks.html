@@ -12,28 +12,36 @@
 </head>
 <body>
 
-    <h1>Mis tareas</h1>
-    <form action="{% url 'create_task' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Escribe un título">
-        <textarea name="description" rows="3" placeholder="Escribe una descripción"></textarea>
-        <button>Guardar</button>
-    </form>
-   
-    {% for task in tasks %}
-        <div>
-            <h4>{{task.title}}</h4>
-            <p>{{task.description}}</p>
-            <button>Check!</button>
-            <form action="{% url 'delete_task' task.id %}" method="POST">
-                {% csrf_token %}
-                <button>Eliminar</button>
-            </form>
-            
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1 class="d-flex justify-content-center">Mis tareas</h1>
+                <form action="{% url 'create_task' %}" method="POST" class="card card-body">
+                    {% csrf_token %}
+                    <label for="title">Título:</label>
+                    <input type="text" name="title" placeholder="Escribe un título" class="form-control mb-2">
+                    <label for="description">Describe tu tarea:</label>
+                    <textarea name="description" rows="3" placeholder="Escribe una descripción" class="form-control mb-2"></textarea>
+                    <button class="btn btn-primary">Insertar</button>
+                </form>
+               
+                {% for task in tasks %}
+                    <div class="card card-body text-black mt-2 d-flex flex-row justify-content-between">
+                        <div>
+                        <h4>{{task.title}}</h4>
+                        <p>{{task.description}}</p>
+                        </div>
+                        <form action="{% url 'delete_task' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>   
+                    </div>
+                {% empty %}
+                    <h1 class="d-flex justify-content-center">Aún no hay tareas.</h1>
+                {% endfor %}
+            </div>
         </div>
-    {% empty %}
-        <h1>Aún no hay tareas.</h1>
-    {% endfor %}
+    </div>
 
 </body>
 </html>
